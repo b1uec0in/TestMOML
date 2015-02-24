@@ -6,8 +6,9 @@
 <MOML>
     <APPLICATIONINFO>
         <UPDATEINFO realTimeType="qMark"/>
-        <START url="start.xml"/>
-        <!-- <ORIENTATION effect="rotate|resize" /> -->
+		<START url="start.xml"/>
+		<START url="webView.xml"/>
+		<!-- <ORIENTATION effect="rotate|resize" /> -->
         <ORIENTATION effect="none"/>
         <!-- <AUTOFIT toleranceRatio="15"/> -->
     </APPLICATIONINFO>
