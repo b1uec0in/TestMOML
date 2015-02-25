@@ -1,0 +1,805 @@
+<!DOCTYPE HTML>
+<!--
+	Created by MOSPI.org on 09.20.2012
+	
+	You can freely copy, distribute, modify for commercial or non-commercial purposes.
+-->
+<html>
+<head>
+    <meta http-equiv="Content-type" name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <title>AGATE API Demo with jQuery Mobile</title>
+    <link rel="stylesheet" href="jquery.mobile/jquery.mobile-1.0.1.min.css" />
+    <link rel="stylesheet" href="index.css" />
+
+    <script src="jquery.mobile/jquery-1.6.4.min"></script>
+
+    <script src="jquery.mobile/jquery.mobile-1.0.1.min.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="index.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="init.js"></script>
+</head>
+<body onload="init();">
+    <div data-role="page" class="type-interior" data-theme="e">
+        <div data-role="header" data-theme="e">
+            <a href="javascript:location.reload()" data-icon="refresh" data-iconpos="notext"
+                id="refresh" class="ui-btn-left">refresh</a>
+            <h1>
+                AGATE API Demo</h1>
+            <a href="#" data-icon="home" data-iconpos="notext" id="intro" class="ui-btn-right">intro</a>
+        </div>
+        <div data-role="content" data-theme="e">
+            <div class="content-secondary">
+                <div data-role="collapsible" data-collapsed="true" data-theme="e" data-content-theme="e">
+                    <h3>
+                        AGATE API</h3>
+                    <ul data-role="listview" data-theme="e" data-dividertheme="e">
+                        <li id="listdivider" data-role="list-divider">AGATE API</li>
+                        <li><a href="#api-accelerometer">Accelerometer</a></li>
+                        <li><a href="#api-appLauncher">AppLauncher <font color=red size=1><i>* New</i></font></a></li>
+                        <li><a href="#api-camera">Camera <font color=blue size=1><i>* Update</i></font></a></li>
+                        <!--				<li><a href="#api-capture">Capture</a></li>  -->
+                        <li><a href="#api-compass">Compass <font color=blue size=1><i>* Update</i></font></a></li>
+                        <li><a href="#api-connection">Connection</a></li>
+                        <li><a href="#api-contacts">Contacts</a></li>
+                        <li><a href="#api-customui">Custom UI <font color=blue size=1><i>* Update</i></font></a></li>
+                        <li><a href="#api-db">Database</a></li>
+                        <li><a href="#api-device">Device</a></li>
+                        <!--
+					<li><a href="#api-events">Events</a></li>
+					-->
+                        <li><a href="#api-file">File</a></li>
+                        <li><a href="#api-geolocation">Geolocation</a></li>
+                        <li><a href="#api-media">Media</a></li>
+                        <li><a href="#api-notification">Notification</a></li>
+                        <li><a href="#api-protocols">Protocols <font color=blue size=1><i>* Update</i></font></a></li>
+                        <li><a href="#api-video">Video <font color=red size=1><i>* New</i></font></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content-primary">
+                <div class="api-div" id="api-intro">
+                    <h2>
+                        AGATE</h2>
+                    <blockquote>
+                        <p>
+                            An AGATE app platform that allows you to author native applications with web technologies
+                            and get access to APIs and app stores.</p>
+                    </blockquote>
+                    <div>
+                        <h4>
+                            Select a <strong>AGATE API </strong>to see it demonstrated.</h4>
+                        <h4 class="help">
+                            See <strong>(assets)/moml/www/apis/</strong> for JavaScript implementations of each API.</h4>
+                        <p id="copyright">
+                            AGATE(based on Citrine Developer build 1.1.5_20140219) by <a href="http://mospi.org" />mospi.org </a></p>
+                    </div>
+                </div>
+                <div class="api-div" id="api-accelerometer">
+                    <h2>
+                        Accelerometer</h2>
+                    <blockquote>
+                        <p>
+                            Captures device motion in the x, y, and z direction.</p>
+                    </blockquote>
+                    <h4 class="help">
+                        <b>Toggle</b> to stop/start accelerometer watch.<br />
+                        <b>Get Current</b> for one-time accelerometer reading.</h4>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a">
+                            X: <b id="x">&nbsp;</b></div>
+                        <div class="ui-block-b">
+                            Y: <b id="y">&nbsp;</b></div>
+                        <div class="ui-block-c">
+                            Z: <b id="z">&nbsp;</b></div>
+                    </div>
+                    <div>
+                        Timestamp: <b id="accel_timestamp">0</b></div>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="button" onclick="toggleAcceleration();">
+                                Toggle</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div data-role="button" onclick="getCurrentAcceleration();">
+                                Get Current</div>
+                        </div>
+                        <!--	<div class="ui-block-b"><div data-role="button" onclick="getCurrentAcceleration();">Get Current</div></div>	   -->
+                    </div>
+                </div>
+                <div class="api-div" id="api-camera">
+                    <h2>
+                        Camera</h2>
+                    <blockquote>
+                        <p>
+                            The <code>camera</code> object provides access to the device's default or user camera
+                            application.</p>
+                    </blockquote>
+                    <div id="camera_output" class="moml_camera" style="margin: auto; width: 96%; height: 250px;
+                        background: white">
+
+                        <script type="xml/momloverlay">
+					
+						<moml:CAMERA id="cam" scaleType="clip"/>  
+				
+                        </script>
+
+                    </div>
+                    <h4 class="help">
+                        <b>Open Camera</b> using device camera.<br />
+                        <b>Take a Picture</b> to get picture</h4>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="button" onclick="open_cam();">
+                                Open Camera</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div data-role="button" onclick="close_cam();">
+                                Close Camera</div>
+                        </div>
+                        <div class="ui-block-c">
+                            <div data-role="button" onclick="type_front();">
+                                Front</div>
+                        </div>
+                        <div class="ui-block-d">
+                            <div data-role="button" onclick="type_back();">
+                                Back</div>
+                        </div>
+                        <div class="ui-block-e">
+                            <div data-role="button" onclick="take_pic();">
+                                Take a Picture</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="api-div" id="api-compass">
+                    <h2>
+                        Compass</h2>
+                    <blockquote>
+                        <p>
+                            Obtains the direction that the device is pointing.</p>
+                    </blockquote>
+                    <h4 class="help">
+                        <b>Toggle</b> to stop/start compass watch.
+                        <br />
+                        <b>Get Current</b> for one-time compass reading.</h4>
+                    <!-- <h4 class="help"><code>Toggle Compass</code> to stop/start
+				compass watch. <br/><code>Get Current</code> for one-time compass reading.</h4> -->
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="button" onclick="toggleCompass();">
+                                Toggle</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div data-role="button" onclick="getCurrentHeading();">
+                                Get Current</div>
+                        </div>
+                    </div>
+                    <div>
+                        Compass Heading: <b id="heading"></b>
+                    </div>
+                    <div style="background:url(compassBorder.png);background-repeat:no-repeat;background-position:center;width:100%;height:200px;">
+                    <div id="compassArrow" style="-webkit-transform:rotate(0deg);text-align:center;width:200px;height:200px;margin:0px auto; color:#ff0000;"><img src="compassArrow.png" width="200px" height="200px" /></div>
+                    </div>
+                </div>
+                <div class="api-div" id="api-connection">
+                    <h2>
+                        Connection</h2>
+                    <blockquote>
+                        <p>
+                            The <code>connection</code> object gives access to the device's cellular and wifi
+                            connection information.</p>
+                    </blockquote>
+                    <div data-role="button" onclick="check_network()">
+                        Check Connection</div>
+                    <div>
+                        Connection: <b id="connection"></b>
+                    </div>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-ip">
+                            IPV4 address: <b id="ipV4Address">&nbsp;</b></div>
+                        <div class="ui-block-ip">
+                            IPV6 address: <b id="ipV6Address">&nbsp;</b></div>
+                        <div class="ui-block-ssid">
+                            SSID: <b id="ssid">&nbsp;</b></div>
+                        <div class="ui-block-bssid">
+                            BSSID: <b id="bssid">&nbsp;</b></div>
+                        <div class="ui-block-linkspeed">
+                            LinkSpeed: <b id="linkSpeed">&nbsp;</b></div>
+                    </div>
+                </div>
+                <div class="api-div" id="api-contacts">
+                    <h2>
+                        Contacts</h2>
+                    <blockquote>
+                        <p>
+                            The <code>contacts</code> object provides access to the device contacts database.</p>
+                    </blockquote>
+                    <div data-role="button" onclick="get_contacts();">
+                        Check Contacts</div>
+                    <div id="contacts-output" class="moml_contacts" style="margin: auto; width: 96%;
+                        height: 150px;">
+                    </div>
+                </div>
+                <div class="api-div" id="api-device">
+                    <h2>
+                        Device</h2>
+                    <blockquote>
+                        <p>
+                            The <code>device</code> object describes the device's hardware and software.</p>
+                    </blockquote>
+                    <table id="deviceinfo">
+                        <tr>
+                            <th>
+                                Device
+                            </th>
+                            <th class="alt">
+                                Value
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Platform
+                            </td>
+                            <td class="alt">
+                                <strong id="platform">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                OS VERSION
+                            </td>
+                            <td class="alt">
+                                <strong id="osversion">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                OS RELEASE
+                            </td>
+                            <td class="alt">
+                                <strong id="osrelease">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                MODEL
+                            </td>
+                            <td class="alt">
+                                <strong id="model">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                MANUFACTURER
+                            </td>
+                            <td class="alt">
+                                <strong id="manufacturer">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                ID
+                            </td>
+                            <td class="alt">
+                                <strong id="hwid">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                Screen
+                            </th>
+                            <th class="alt">
+                                Value
+                            </th>
+                        </tr>
+                        <tr>
+                            <td>
+                                Width
+                            </td>
+                            <td class="alt">
+                                <strong id="width">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Height
+                            </td>
+                            <td class="alt">
+                                <strong id="height">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                DENSITY
+                            </td>
+                            <td class="alt">
+                                <strong id="density">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                SCALE DENSITY
+                            </td>
+                            <td class="alt">
+                                <strong id="scaleDensity">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                DENSITY DPI
+                            </td>
+                            <td class="alt">
+                                <strong id="densitydpi">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                XDPI
+                            </td>
+                            <td class="alt">
+                                <strong id="xdpi">&nbsp;</strong>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                YDPI
+                            </td>
+                            <td class="alt">
+                                <strong id="ydpi">&nbsp;</strong>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="ui-block-b">
+                        <div data-role="button" onclick="deviceInfo();">
+                            Get Device Information</div>
+                    </div>
+                </div>
+                <!--
+		    <div class="api-div" id="api-events">
+				<h2>Events</h2>
+				<blockquote>
+					<p>AGATE lifecycle events.</p>
+				</blockquote>
+				<h4 class="help">Tap device (or virtual device) <code>menu</code> or <code>search</code> buttons to see example callback output.</h4>
+				<span id="eventOutput"></span>
+				<h4>Other <code>event</code> example callbacks use console.log</h4>								
+			</div>
+-->
+                <div class="api-div" id="api-file">
+                    <h2>
+                        File</h2>
+                    <blockquote>
+                        <p>
+                            An API to read, write and navigate file system hierarchies.</p>
+                    </blockquote>
+                    <div id="file-system-text">
+                    </div>
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="button" onclick="createFile();">
+                                Create</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div data-role="button" onclick="writeFile();">
+                                Write</div>
+                        </div>
+                        <span id="file-status">Status:</span> <span id="file-contents"></span>
+                    </fieldset>
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="button" onclick="readFile();">
+                                Read</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div data-role="button" onclick="removeFile();">
+                                Remove</div>
+                        </div>
+                        Read text: <span id="file-read-text"></span>
+                        <br />
+                        <!--Data Url: <span id="file-read-dataurl"></span>-->
+                    </fieldset>
+                </div>
+                <div class="api-div" id="api-geolocation">
+                    <h2>
+                        Geolocation</h2>
+                    <blockquote>
+                        <p>
+                            The <code>geolocation</code> object provides access to the device's GPS sensor.</p>
+                    </blockquote>
+                    <h4 class="help">
+                        <b>Toggle</b> to stop/start geolocation watch.
+                        <br />
+                        <b>Get Current</b> for one-time geolocation reading.</h4>
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div data-role="button" onclick="toggleWatchPosition();">
+                                Toggle</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div data-role="button" onclick="getCurrentPosition();">
+                                Get Current</div>
+                        </div>
+                    </div>
+                    <div id="cur_position">
+                    </div>
+                    <img id="map" />
+                </div>
+                <div class="api-div" id="api-media">
+                    <h2>
+                        Media</h2>
+                    <blockquote>
+                        <p>
+                            The <code>Media</code> object provides the ability to record and play back audio
+                            files on a device.
+                        </p>
+                    </blockquote>
+                    <b>Play MP3 Song</b>
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <div data-role="button" id="playaudio" class="wider-btn" data-theme="e" onclick="play()">
+                            &nbsp;Play&nbsp;</div>
+                        <div data-role="button" id="pauseaudio" class="wider-btn" data-theme="e" onclick="pause()">
+                            Pause</div>
+                        <div data-role="button" id="stopaudio" class="wider-btn" data-theme="e" onclick="stop()">
+                            &nbsp;Stop&nbsp;</div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                Status: <span id="audio_status"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <b>Live Audio Recording</b>
+                    <div data-role="controlgroup" data-type="horizontal">
+                        <div data-role="button" id="startRecord" class="wider-btn" data-theme="e" onclick="startRecord()">
+                            Start record</div>
+                        <div data-role="button" id="endRecord" class="wider-btn" data-theme="e" onclick="endRecord()">
+                            End record</div>
+                        <div data-role="button" id="playbackRecord" class="wider-btn" data-theme="e" onclick="playBack()">
+                            &nbsp;Play&nbsp;</div>
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                Status: <span id="record-status"></span>
+                            </div>
+                            <div class="ui-block-b">
+                                <span id="record-time"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="api-div" id="api-notification">
+                    <h2>
+                        Notification</h2>
+                    <blockquote>
+                        <p>
+                            Visual, audible, and tactile device notifications.</p>
+                    </blockquote>
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button onclick="showAlert();" data-theme="e" data-icon="alert">
+                                Alert</button></div>
+                        <div class="ui-block-b">
+                            <button onclick="showConfirm();" data-theme="e" data-icon="check">
+                                Confirm</button></div>
+                    </fieldset>
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button onclick="beep();" data-theme="e">
+                                Beep</button></div>
+                        <div class="ui-block-b">
+                            <button onclick="vibrate();" data-theme="e">
+                                Vibrate</button></div>
+                    </fieldset>
+                </div>
+                <div class="api-div" id="api-db">
+                    <h2>Database</h2>
+                    <blockquote>
+                        <p>
+                            Database access.</p>
+                    </blockquote>
+                    <h4 class="help">
+                        Uses <strong>Database</strong> not <strong>Web Storage</strong></h4>
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button onclick="createDB();" data-theme="e">
+                                Create DB</button></div>
+                        <div class="ui-block-b">
+                            <button onclick="writeDB();" data-theme="e">
+                                Write DB</button></div>
+                    </fieldset>
+                    <fieldset class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <button onclick="readDB();" data-theme="e">
+                                Read DB</button></div>
+                        <div class="ui-block-b">
+                            <button onclick="getCount();" data-theme="e">
+                                SQL Result Set</button></div>
+                    </fieldset>
+                    <div data-role="button" onclick="deleteDB();">
+                        Delete Data</div>
+                    <div class="ui-grid-a">
+                        SQL Result:
+                        <br />
+                        <span id="sql-result"></span>
+                        <br />
+                    </div>
+                </div>
+                <div class="api-div" id="api-customui">
+                    <h2>
+                        Custom UI</h2>
+                    <blockquote>
+                        <p>
+                            You can display <code>native UI controls</code> around and inside the Webview.</p>
+                    </blockquote>
+                    <div id="customui_output" class="moml_coverflow" style="margin: auto; width: 96%;
+                        height: 200px; background: white">
+
+                        <script type="xml/momloverlay">
+							<moml:ACCELCOVERFLOW  id="coverflow" defaultImg="#fdf7d9" dataSource="www/res/coverflow/coverflowData.xml" dataList="/IMAGELIST/ITEM" imagePath="./@src" titlePath="./@name" indexingStyle="dot" shadow="mirror" playDuration="1" onChange="{container.parent.loadSrc='javascript:coverflow_onChange('+container.coverflow.index+')'}" index="0" />
+                        </script>
+
+                    </div>
+                    <div class="ui-grid-a">
+                        <div id="coverflow-data" style="margin-left:50px;">
+                        </div>
+                    </div>
+                </div>
+
+				<!-- protocols start -->
+				<div class="api-div" id="api-protocols">
+                    <h2>
+                        Protocols</h2>
+                    <blockquote>
+                        <p>agate provides several protocols to access resources.</p>
+                        <p>protocols : embed, http, https, storage</p>
+                    </blockquote>
+				    <!-- embed -->
+					<div class="ui-grid-a">
+                        <strong>* embed protocol</strong><br />
+						: Accesses embeded resources that are included in an app.<br />
+						For example :<br />
+						<div class="source_text">&lt;WINDOW defaultImg="<span class="redbold">embed:</span>/img/face-smile-4.png"/&gt;</div>
+                        <br />
+                    </div>
+                    <div id="protocol_embedoutput" class="moml_embedimg" style="margin: auto; width: 128px;
+                        height: 128px; background: white">
+                        <script type="xml/momloverlay">
+							<moml:WINDOW loadingEffect="progressBar|fadeIn" defaultImg="embed:/img/face-smile-4.png"/>
+                        </script>
+                    </div>
+
+					<!-- http, https -->
+					<div class="ui-grid-a">
+                        <strong>* http, https protocol</strong><br />
+						: Accesses web resources.<br />
+						For example :<br />
+						<div class="source_text">&lt;WINDOW defaultImg="<span class="redbold">http://</span>mospi.org/momlApps/AgateApiDemo/www/res/protocols/face-smile-big-icon.png"/&gt;</div>
+                    </div>
+                    <div id="protocol_weboutput" class="moml_webimg" style="margin: auto; width: 128px;
+                        height: 128px; background: white">
+                        <script type="xml/momloverlay">
+							<moml:WINDOW loadingEffect="progressBar|fadeIn" defaultImg="http://mospi.org/momlApps/AgateApiDemo/www/res/protocols/face-smile-big-icon.png"/>
+                        </script>
+                    </div>
+
+					<!-- storage -->
+					<div class="ui-grid-a">
+                        <strong>* storage protocol</strong><br />
+						: Accesses resources that are located at an writable storage such as an SD card.<br />
+						For example :<br />
+						<div class="source_text">&lt;WINDOW defaultImg="<span class="redbold">storage:</span>img.png"/&gt;</div>
+						<div class="ui-block-b">
+                            <div data-role="button" onclick="{launch_albums();}">
+                                Select Image
+							</div>
+                        </div>
+						<p/>
+                    </div>
+                    <fieldset class="ui-grid-a">
+						<span id="file-path">Path : </span> <span id="file-path-contents"></span>
+					</fieldset>
+                    <div id="protocol_storageoutput" class="moml_storageimg" style="margin: auto; width: 96%;
+                        height: 200px; background: white">
+                        <script type="xml/momloverlay">
+							<moml:WINDOW id="storageWin" loadingEffect="progressBar|fadeIn" defaultImg="#ffffff">
+							</moml:WINDOW>
+                        </script>
+                    </div>
+                </div>
+				<!-- protocols end -->
+
+				<!-- appLauncher start -->
+				<div class="api-div" id="api-appLauncher">
+                    <h2>appLauncher</h2>
+                    <blockquote>
+                        <p>Launches another application from application.</p>
+                    </blockquote>
+
+					<div class="ui-grid-a">
+						<strong>* exec</strong><br />
+						: Launches application according to type.<br />
+	                    <p>Types are audioRecorder, imageCapture, videoCapture, albums.</p>
+					</div>
+				    <!-- audioRecorder -->
+					<div class="ui-grid-a">
+                        <strong>1) audioRecorder</strong><br />
+							: Launches audioRecord application.<br />
+						For example :<br />
+						<div class="source_text">appLauncher.exec('<span class="redbold">audioRecorder</span>');</div>
+						<div data-role="controlgroup" data-type="horizontal">
+							<div data-role="button" id="launchaudiorecorder" class="wider-btn" data-theme="e" onclick="launch_audioRecorderApp()">
+								Launch</div>
+						</div>
+						
+						<fieldset class="ui-grid-a">
+							<span>Path: </span><span id="audioRecorderResult-path-contents"></span>
+						</fieldset>
+
+						<div data-role="controlgroup" data-type="horizontal">
+							<div data-role="button" id="playaudiorecorder" class="wider-btn" data-theme="e" onclick="play_audioRecorderResult()">
+								Play</div>
+							<div data-role="button" id="stopaudiorecorder" class="wider-btn" data-theme="e" onclick="stop_audioRecorderResult()">
+								Stop</div>							
+						</div>
+                    </div>
+					<br /><br />
+					<!-- imageCapture
+					<div class="ui-grid-a">
+                        <strong>2) imageCapture</strong><br />
+						: Launches imageCapture application.<br />
+						For example :<br />
+						<div class="source_text">appLauncher.exec('<span class="redbold">imageCapture</span>');</div>
+						<div data-role="controlgroup" data-type="horizontal">
+							<div data-role="button" id="playaudio" class="wider-btn" data-theme="e" onclick="launch_imageCaptureApp()">
+							Launch</div>
+							<p />
+							<fieldset class="ui-grid-a">
+								<span>Path: </span><span id="imageCaptureResult-path-contents"></span>
+							</fieldset>
+
+							<div id="appLauncher_imagecaptureoutput" class="moml_imagecaptureimg" style="margin: auto; width: 96%;
+								height: 200px; background: white">
+								<script type="xml/momloverlay">
+									<moml:WINDOW id="imageCaptureWin" loadingEffect="progressBar|fadeIn" defaultImg="#ffffff">
+									</moml:WINDOW>
+								</script>
+							</div>
+						</div>
+                    </div>
+					<br /><br />
+					-->
+					<!-- videoCapture -->
+					<div class="ui-grid-a">
+                        <strong>2) videoCapture</strong><br />
+						: Launches videoCapture application.<br />
+						For example :<br />
+						<div class="source_text">appLauncher.exec('<span class="redbold">videoCapture</span>');</div>
+						<div data-role="controlgroup" data-type="horizontal">
+							<div data-role="controlgroup" data-type="horizontal">
+								<div data-role="button" id="playaudio" class="wider-btn" data-theme="e" onclick="launch_videoCaptureApp()">
+								Launch</div>
+							</div>
+							<fieldset class="ui-grid-a">
+								<span>Path: </span><span id="videoCaptureResult-path-contents"></span>
+							</fieldset>
+
+							<div id="appLauncher_videocaptureoutput" class="moml_videocaptureimg" style="margin: auto; width: 96%;
+								height: 200px; background: white">
+								<script type="xml/momloverlay">
+									<moml:VIDEO id="videoCaptureVideo"/>
+								</script>
+							</div>
+							<div data-role="controlgroup" data-type="horizontal">
+								<div data-role="button" id="playvideocapture" class="wider-btn" data-theme="e" onclick="play_videoCaptureResult()">
+									Play</div>
+								<div data-role="button" id="pausevideocapture" class="wider-btn" data-theme="e" onclick="pause_videoCaptureResult()">
+									Pause</div>
+								<div data-role="button" id="stopvideocapture" class="wider-btn" data-theme="e" onclick="stop_videoCaptureResult()">
+									Stop</div>
+							</div>
+						</div>
+                    </div>
+					<br /><br />
+					<!-- albums -->
+					<div class="ui-grid-a">
+                        <strong>3) albums</strong><br />
+						: Launches albums application.<br />
+						For example :<br />
+						<div class="source_text">appLauncher.exec('<span class="redbold">albums</span>');</div>
+						<div data-role="controlgroup" data-type="horizontal">
+							<div data-role="button" id="playaudio" class="wider-btn" data-theme="e" onclick="launch_albumsApp()">
+							Launch</div>
+							<p />
+							<fieldset class="ui-grid-a">
+								<span>Path: </span><span id="albumsResult-path-contents"></span>
+							</fieldset>
+							<div id="appLauncher_albumsoutput" class="moml_albumsimg" style="margin: auto; width: 96%;
+								height: 200px; background: white">
+								<script type="xml/momloverlay">
+									<moml:WINDOW id="albumsWin" loadingEffect="progressBar|fadeIn" defaultImg="#ffffff">
+									</moml:WINDOW>
+								</script>
+							</div>
+						</div>
+                    </div>
+					<br /><br />
+					<!-- twitter -->
+					<div class="ui-grid-a">
+                        <strong>* openUri</strong><br />
+						: Launches application according to uri scheme<br />
+						For example :<br />
+						<div class="source_text">appLauncher.openUri('<span class="redbold">twitter://post?message=HelloAgate!</span>', '<span class="redbold">goInstallPage|askErrorPopup</span>');</div>
+						<div data-role="controlgroup" data-type="horizontal">
+							<div data-role="button" id="playaudio" class="wider-btn" data-theme="e" onclick="launch_twitterApp()">
+							Launch</div>
+							<p />
+						</div>
+                    </div>
+                </div>
+				<!-- appLauncher end -->
+
+				<!-- video start -->
+				<div class="api-div" id="api-video">
+                    <h2>
+                        Video</h2>
+                    <blockquote>
+                        <p>Supports caption.</p>
+                    </blockquote>
+
+                    <div id="video_output" class="moml_videoimg" style="margin: auto; width: 96%;
+								height: 200px; background: white">
+                        <script type="xml/momloverlay">
+							<moml:VIDEO id="video" src="http://mospi.org/sample/agateapi/res/video/moml.mp4" captionSrc="http://mospi.org/sample/agateapi/res/video/moml.smi"/>
+                        </script>
+                    </div>
+					<div data-role="controlgroup" data-type="horizontal">
+						<div data-role="button" id="playvideo" class="wider-btn" data-theme="e" onclick="play_video()">
+							Play</div>
+						<div data-role="button" id="pausevideo" class="wider-btn" data-theme="e" onclick="pause_video()">
+							Pause</div>
+						<div data-role="button" id="stopvideo" class="wider-btn" data-theme="e" onclick="stop_video()">
+							Stop</div>
+					</div>
+
+					<div class="source_text">&lt;VIDEO src="http://mospi.org/sample/agateapi/res/video/moml.mp4" <span class="redbold">captionSrc="http://mospi.org/sample/agateapi/res/video/moml.smi"</span>/&gt;</div>
+                </div>
+				<!-- video end -->
+            </div>
+        </div>
+        <div data-role="footer" data-position="fixed" class="footer-docs" data-theme="e">
+            <p>
+                AGATE(based on Citrine Developer build 1.1.5_20140219) by <a href="http://mospi.org" />mospi.org </a></p>
+        </div>
+    </div>
+
+    <script type="text/javascript" charset="utf-8" src="apis/accelerometer.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/camera.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/compass.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/connection.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/contacts.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/device.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/events.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/file.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/geolocation.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/media.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/notification.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/storage.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/customui.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/protocols.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/appLauncher.js"></script>
+
+    <script type="text/javascript" charset="utf-8" src="apis/video.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- db.result.getXmlData -->
+
+<IMAGELIST>
+	<ITEM src="/www/res/coverflow/img/image001.png" name="album1" title="Red" artist="Taylor Swift"/>
+	<ITEM src="/www/res/coverflow/img/image002.png" name="album2" title="good kid, m.A.A.d city" artist="Kendrick Lamar"/>
+	<ITEM src="/www/res/coverflow/img/image003.png" name="album3" title="Babel" artist="Mumford &amp; Sons"/>
+	<ITEM src="/www/res/coverflow/img/image004.png" name="album4" title="Viva Duets" artist="Tony Bennett"/>
+	<ITEM src="/www/res/coverflow/img/image005.png" name="album5" title="The Truth About Love" artist="P!nk"/>
+	<ITEM src="/www/res/coverflow/img/image006.png" name="album6" title="On This Winter's Night" artist="Lady Antebellum"/>
+	<ITEM src="/www/res/coverflow/img/image007.png" name="album7" title="Two Eleven" artist="Brandy"/>
+	<ITEM src="/www/res/coverflow/img/image008.png" name="album8" title="Tornado" artist="Little Big Town"/>
+	<ITEM src="/www/res/coverflow/img/image009.png" name="album9" title="21" artist="Adele"/>
+	<ITEM src="/www/res/coverflow/img/image010.png" name="album10" title="Overexposed" artist="Maroon 5"/>
+	<ITEM src="/www/res/coverflow/img/image011.png" name="album11" title="Until Now" artist="Swedish House Mafia"/>
+	<ITEM src="/www/res/coverflow/img/image012.png" name="album12" title="Christmas With Scotty McCreery" artist="Scotty McCreery"/>
+	<ITEM src="/www/res/coverflow/img/image013.png" name="album12" title="Kaleidoscope Dream" artist="Miguel"/>
+	<ITEM src="/www/res/coverflow/img/image014.png" name="album12" title="Apocryphon" artist="The Sword"/>
+	<ITEM src="/www/res/coverflow/img/image015.png" name="album12" title="Blown Away" artist="Carrie Underwood"/>
+</IMAGELIST>
+
+

@@ -1,55 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <!--
-  Created by MoSPI.org on 11.30.2011
+    Created by MOSPI.org on 09.20.2012
 
-  Permission is granted to copy, distribute, modify under the terms of Citrine License.
-
-  Copyright (C) MoSPI.org. All rights reserved.
+    You can freely copy, distribute, modify for commercial or non-commercial purposes.
 -->
-<MOML version="1.0.0">
-    <THEMES id="theme1">
-        <THEME id="h1" fontStyle="italic" fontColor="#ffffaa" fontSize="20" margin="0,10,5,0" />
-        <THEME id="p1" fontColor="#ffffff" fontSize="16" margin="20,10,0,0"/>
-        <THEME id="p2" fontColor="#ffffff" fontSize="16" margin="40,0,0,0"/>
-        <THEME id="code" fontColor="#ffffff" fontSize="15" margin="40,0,0,5" defaultImg="#333333"/>
-    </THEMES>
-	<UI>
-        <UILAYOUT portrait="480,800" theme="theme1">
-            <WINDOW layout="20,20,440,760" align="linear:vertical" defaultImg="#000000" >
-                <LABEL themeId="h1" text="Make your own MOML application ! "/>
-                <LABEL themeId="p1" text="Step 1. make applicationInfo.xml"/>
-                <LABEL themeId="p2" text="applicationInfo.xml : "/>
-                <LABEL themeId="code"  text="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;
-&lt;MOML version=&quot;1.0.0&quot;&gt;&#10;
-    &lt;APPLICATIONINFO&gt;    &#10;
-        &lt;START url=&quot;start.xml&quot;/&gt;&#10;
-    &lt;/APPLICATIONINFO&gt;&#10;
-&lt;/MOML&gt;" />
+<MOML>
+    <DATASOURCE id="coverflowData" src="/www/res/coverflow/coverflowData.xml"/>
 
-                <LABEL themeId="p1" text="Step 2. make start.xml"/>
-                <LABEL themeId="p2" text="start.xml : " fontStyle="underline" fontColor="#99aaff" onClick="url:startSample.xml" target="root.new"/>
-                <LABEL themeId="code"  text="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&#10;
-&lt;MOML version=&quot;1.0.0&quot;&gt;&#10;
-    &lt;UI&gt;&#10;
-        &lt;UILAYOUT portrait=&quot;300,300&quot; landscape=&quot;300,300&quot;  &gt;&#10;
-            &lt;WINDOW layout=&quot;0,0,300,300&quot; &#10;
-                    align=&quot;linear:vertical&quot; defaultImg=&quot;#ffffff&quot; &gt;&#10;
-                    &#10;
-                &lt;LABEL text=&quot;Hello!&quot; /&gt;&#10;
-                &lt;BUTTON text=&quot;Ok Button&quot;/&gt;&#10;
-                &lt;CHECKBOX text=&quot;option 1&quot; selected=&quot;true&quot; /&gt;&#10;
-                &lt;CHECKBOX text=&quot;option 2&quot;/&gt;&#10;
-                &#10;
-            &lt;/WINDOW&gt;&#10;
-        &lt;/UILAYOUT&gt;&#10;
-    &lt;/UI&gt;&#10;
-&lt;/MOML&gt;" />
+    <UILAYOUT portrait="320,460" landscape="320,460">
+        <WINDOW layout="0,0,320,460">
+            <WEBVIEW2 id="webview" layout="0,0,320,460" src="www/index.html" supportZoom="zoom" clientControl="false"/>
+        </WINDOW>
+    </UILAYOUT>
 
-                <LABEL themeId="p1" text="Step 3. upload files to your web server"/>
-                <LABEL themeId="p1" text="Step 4. open with MOML application Viewer"/>
-                <LABEL themeId="p2" text="input your application URL"/>
-                <LABEL themeId="code" text="ex) http://www.myserver.com/myappdir/applicationInfo.xml"/>
-            </WINDOW>
-        </UILAYOUT>
-	</UI>
+    <FUNCTION id="notification_restart">
+        <FUNCTIONITEM cmd="{device.systemPopup('Alert', 'You selected button 1', 'OK', '', '')}"/>
+    </FUNCTION>
+
+    <FUNCTION id="notification_Exit">
+        <FUNCTIONITEM cmd="{device.systemPopup('Alert', 'You selected button 2', 'OK', '', '')}"/>
+    </FUNCTION>
 </MOML>
